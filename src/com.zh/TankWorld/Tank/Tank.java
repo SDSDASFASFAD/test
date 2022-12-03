@@ -5,6 +5,7 @@ public abstract class Tank {
     private int y ;
     private int direction;
     private int speed;
+    private boom_list boom_list;
 //    private boolean shoot;
 
     public int getSpeed() {
@@ -55,10 +56,14 @@ public abstract class Tank {
         x+=speed;
     }
 
-    public Tank(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public TankWorld.Tank.boom_list getBoom_list() {
+        return boom_list;
     }
+
+    //    public Tank(int x, int y) {
+//        this.x = x;
+//        this.y = y;
+//    }
 
 //    public boolean isShoot() {
 //        return shoot;
@@ -68,16 +73,18 @@ public abstract class Tank {
 //        this.shoot = shoot;
 //    }
 
-    public Tank(int x, int y, int direction) {
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
-    }
+//    public Tank(int x, int y, int direction) {
+//        this.x = x;
+//        this.y = y;
+//        this.direction = direction;
+//    }
 
     public Tank(int x, int y, int direction, int speed) {
         this.x = x;
         this.y = y;
         this.direction = direction;
         this.speed = speed;
+        this.boom_list = new boom_list();
+        this.boom_list.start();
     }
 }

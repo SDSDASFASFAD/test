@@ -39,27 +39,11 @@ public class MyPanel extends JPanel implements KeyListener ,Runnable{
             drawTank(enemyTank.getX(),enemyTank.getY(),g,enemyTank.getDirection(),1);
         }
 
-//        Thread shoot_thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    if (myTank.isShoot()) {
-//                        System.out.println("shoot属性被更改");
-//                        boom boom = new boom(myTank.getX(), myTank.getY(), myTank.getDirection());
-//                        draw_boom(boom, g, 0);
-////                        boom.start();
-//                    }
-//                    myTank.setShoot(false);
-//                }
-//            }
-//        });
 
-//        shoot_thread.setDaemon(true);
-//        shoot_thread.start();
-
-        if(myTank.getBoom() != null && myTank.getBoom().isSurvive()){
+        for (int i = 0 ; i < myTank.getBoom_list().get_size() ; i++){
+            boom boom = myTank.getBoom_list().get_boom(i);
             g.setColor(Color.CYAN);
-            g.fill3DRect(myTank.getBoom().getX(),myTank.getBoom().getY(),5,5,false);
+            g.fill3DRect(boom.getX(),boom.getY(),5,5,false);
         }
 
 

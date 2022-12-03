@@ -1,8 +1,6 @@
 package TankWorld.Tank;
 
-public class boom extends Thread{
-
-    private boom booms;
+public class boom {
 
     private int x;
 
@@ -18,6 +16,7 @@ public class boom extends Thread{
         this.x = x;
         this.y = y;
         this.direction = direction;
+        this.speed = 10;
     }
 
     public boom(int x, int y, int direction, int speed) {
@@ -75,35 +74,8 @@ public class boom extends Thread{
         x+=speed;
     }
 
-
-
-    @Override
-    public void run() {
-        System.out.println("炮弹发射");
-        while (true) {
-                switch (direction) {
-                    case 0:
-                        moveUp();
-                        break;
-                    case 1:
-                        moveRight();
-                        break;
-                    case 2:
-                        moveDown();
-                        break;
-                    case 3:
-                        moveLeft();
-                        break;
-                }
-                System.out.println("x=" + x + "\t" + "y=" + y);
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (x<=0 || x>=1000 || y<=0 || y>= 750){
-                break;
-            }
-        }
+    public boom clone(){
+        return this.clone();
     }
+
 }

@@ -2,13 +2,11 @@ package TankWorld.Tank;
 
 public class MyTank extends Tank{
 
-    private boom boom;
-
-    public TankWorld.Tank.boom getBoom() {
-        return boom;
-    }
 
     public void shoot(){
+
+        boom boom = null;
+
         switch (this.getDirection()){
             case 0:
                 boom = new boom(this.getX()+20,this.getY(),0,10);
@@ -26,11 +24,12 @@ public class MyTank extends Tank{
                 System.out.println("暂时没有处理");
         }
 
-        boom.start();
+        this.getBoom_list().add_boom(boom);
+
+//        boom.start();
     }
 
-    public MyTank(int x, int y ) {
-        super(x, y);
+    public MyTank(int x, int y) {
+        super(x, y, 0, 10);
     }
-
 }
