@@ -1,16 +1,59 @@
 plugins {
     id 'java'
+    id 'scala'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
+apply plugin: 'scala'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+
+ext {
+    lang3Version = "3.12.0"
+    yamlVersion = "1.30"
+    fastjsonVersion = "1.2.83"
+    hutoolVersion = "5.7.22"
+    mysqlVersion = "8.0.23"
+    lombokVersion = "1.18.24"
+    hadoopVersion = "3.0.0-cdh6.3.0"
+    kafkaVersion = "2.2.1-cdh6.3.0"
+    codecVersion = "1.14"
+    sparkVersion = "2.4.0-cdh6.3.0"
+    scalaVersion = "2.11.12"
+    hiveVersion = "2.1.1-cdh6.3.0"
+}
+
 repositories {
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    maven { url 'https://repository.cloudera.com/content/repositories/releases/' }
+    maven { url 'https://repository.cloudera.com/artifactory/cloudera-repos/' }
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
+    compileOnly group: "org.scala-lang", name: "scala-library", version: "$scalaVersion"
+    implementation group: 'org.apache.spark', name: 'spark-core_2.11', version: "$sparkVersion"
+    implementation group: 'org.apache.spark', name: 'spark-sql_2.11', version: "$sparkVersion"
+    implementation group: 'org.apache.spark', name: 'spark-hive_2.11', version: "$sparkVersion"
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: "$lang3Version"
+    implementation group: "com.alibaba", name: "fastjson", version: "$fastjsonVersion"
+    implementation group: 'mysql', name: 'mysql-connector-java', version: "$mysqlVersion"
+    //工具类
+    implementation group: 'cn.hutool', name: 'hutool-all', version: "$hutoolVersion"
+}
 
+// 全量打包插件
+shadowJar {
+    dependencies {
+    }
+    zip64 true
+}
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier "sources"
 }
 
 test {
